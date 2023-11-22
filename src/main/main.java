@@ -34,7 +34,7 @@ class Matriz {
             validarEntrada(fila, columna);
 
             this.matriz[fila][columna] = numero;
-           
+            generarSecuenciales(fila, columna);
         } catch (InputMismatchException e) {
             throw new InputMismatchException("Formato de entrada incorrecto.");
         } catch (IllegalArgumentException e) {
@@ -50,7 +50,35 @@ class Matriz {
             System.out.println();
         }
     }
+    private void generarSecuenciales(int fila, int columna) {
+        int valor = matriz[fila][columna];
 
+        // Generar secuencia en la fila hacia la derecha
+        for (int i = columna + 1; i < 5; i++) {
+            matriz[fila][i] = ++valor;
+        }
+
+        valor = matriz[fila][columna];
+
+        // Generar secuencia en la fila hacia la izquierda
+        for (int i = columna - 1; i >= 0; i--) {
+            matriz[fila][i] = ++valor;
+        }
+
+        valor = matriz[fila][columna];
+
+        // Generar secuencia en la columna hacia abajo
+        for (int i = fila + 1; i < 5; i++) {
+            matriz[i][columna] = ++valor;
+        }
+
+        valor = matriz[fila][columna];
+
+        // Generar secuencia en la columna hacia arriba
+        for (int i = fila - 1; i >= 0; i--) {
+            matriz[i][columna] = ++valor;
+        }
+    }
     private void validarEntrada(int fila, int columna) {
         if (fila < 0 || fila >= 5 || columna < 0 || columna >= 5) {
             throw new IllegalArgumentException("Ubicación fuera de los límites de la matriz.");
